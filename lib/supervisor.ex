@@ -8,7 +8,8 @@ defmodule TowerDefense.Supervisor do
   def init(_) do
     children = [
       supervisor(TowerDefense.Player.Supervisor, []),
-      supervisor(TowerDefense.Monsters.Supervisor, [])
+      supervisor(TowerDefense.Monsters.Supervisor, []),
+      supervisor(TowerDefense.Tower.Supervisor, [])
     ]
     supervise(children, strategy: :one_for_all)
   end
