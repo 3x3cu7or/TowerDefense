@@ -20,11 +20,14 @@ defmodule TowerDefense.Tower.Attributes do
     upgrade_cost = get_tower_attributes().upgrade_cost
     case player_gold < upgrade_cost do
       true -> IO.puts "Not enough gold!"
-      false -> {
-        increase_level(),
-        Player.Stats.modify_my_gold(0-upgrade_cost)
-      }
+      false -> upgrade(upgrade_cost)
     end
+  end
+
+  def upgrade(upgrade_cost) do
+    increase_level()
+    Player.Stats.modify_my_gold(0-upgrade_cost)
+    IO.puts "Tower upgraded!"
   end
 
   def get_tower_attributes() do
