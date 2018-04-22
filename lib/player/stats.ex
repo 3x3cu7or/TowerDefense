@@ -6,7 +6,7 @@ defmodule TowerDefense.Player.Stats do
   end
 
   def init(_initial_data) do
-    IO.puts "Started player module"
+    IO.puts "Started player module!"
     stats = %{life: 100, gold: 0}
     {:ok, stats}
   end
