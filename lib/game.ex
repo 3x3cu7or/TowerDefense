@@ -39,7 +39,7 @@ defmodule TowerDefense.Game do
     for _monster <- monsters do
       Stats.modify_my_life(-10)
     end
-    
+
     :timer.sleep(1000)    
     if length(monsters) == 0 do
       IO.puts "\nYou killed all monsters!\n"
@@ -57,7 +57,9 @@ defmodule TowerDefense.Game do
     damage = Attributes.get_tower_attributes.damage
     if length(monsters) > 0 do
       :timer.sleep(1000)
+      IO.puts ""
       IO.inspect monsters
+      IO.puts ""
       Wave.decrease_life(damage)
     end
   end
