@@ -34,12 +34,13 @@ defmodule TowerDefense.Game do
   def send_wave do
     for _n <- 1..7 do
       fight()
-      :timer.sleep(1000)
     end
     monsters = Wave.get_wave.monsters
     for _monster <- monsters do
       Stats.modify_my_life(-10)
     end
+    
+    :timer.sleep(1000)    
     if length(monsters) == 0 do
       IO.puts "\nYou killed all monsters!\n"
     else
@@ -55,13 +56,10 @@ defmodule TowerDefense.Game do
     monsters = Wave.get_wave.monsters
     damage = Attributes.get_tower_attributes.damage
     if length(monsters) > 0 do
-      # IO.puts "ceva"
+      :timer.sleep(1000)
       IO.inspect monsters
       Wave.decrease_life(damage)
     end
-    # if length(monsters) == 0 do
-    #   IO.puts "Wave defeated!"
-    # end
   end
 
 end
