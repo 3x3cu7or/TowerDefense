@@ -3,31 +3,65 @@ defmodule TowerDefense.Game do
   alias TowerDefense.Tower.Attributes
   alias TowerDefense.Monsters.Wave
 
-  def gold do
-    gold = Stats.get_my_stats().gold
-    IO.puts "You have #{gold} gold!"
+  def help do
+    IO.puts "
+    Commands:
+      .player - returns player info
+      .tower - returns tower info
+      .wave - return next wave info
+
+      .upgrade - upgrades tower
+      .send_wave - sends next wave
+    "
   end
 
-  def life do
-    life = Stats.get_my_stats().life
-    IO.puts "You have #{life} life!"
+  def player do
+    Stats.get_my_stats()
   end
 
   def tower do
-    tower = Attributes.get_tower_attributes()
-    IO.puts "
-    Tower level: #{tower.level}
-    Damage: #{tower.damage}
-    Upgrade cost: #{tower.upgrade_cost}
-    "
+    Attributes.get_tower_attributes()
+  end
+
+  def wave do
+    Wave.get_wave
   end
 
   def upgrade do
     Attributes.upgrade_tower
   end
 
-  def wave do
-    Wave.get_wave
+  def send_wave do
+    for _n <- 1..7 do
+      fight()
+      :timer.sleep(1000)
+    end
+    monsters = Wave.get_wave.monsters
+    for _monster <- monsters do
+      Stats.modify_my_life(-10)
+    end
+    if length(monsters) == 0 do
+      IO.puts "\nYou killed all monsters!\n"
+    else
+      IO.puts "\nYou failed to kill all monsters!\n"
+      IO.puts "Remaining monster: "
+      IO.inspect monsters
+    end
+    Wave.increase_level
+    IO.puts "\nNext wave is prepared!\n"
+  end
+
+  def fight() do
+    monsters = Wave.get_wave.monsters
+    damage = Attributes.get_tower_attributes.damage
+    if length(monsters) > 0 do
+      # IO.puts "ceva"
+      IO.inspect monsters
+      Wave.decrease_life(damage)
+    end
+    # if length(monsters) == 0 do
+    #   IO.puts "Wave defeated!"
+    # end
   end
 
 end

@@ -9,7 +9,7 @@ defmodule TowerDefense.Tower.Attributes do
   def init(_initial_data) do
     IO.puts "Started tower module!"    
     level = 1
-    damage = 10 + 5*level
+    damage = 5 + 5*level
     upgrade_cost = 50*level
     attributes = %{level: level, damage: damage, upgrade_cost: upgrade_cost}
     {:ok, attributes}

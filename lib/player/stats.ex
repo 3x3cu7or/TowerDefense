@@ -30,7 +30,13 @@ defmodule TowerDefense.Player.Stats do
   def handle_call({:modify_the_life, amount}, _from, my_stats) do
     %{life: old_life} = my_stats
     new_stats = Map.put(my_stats, :life, old_life + amount)
-    {:reply, new_stats, new_stats}
+    if old_life + amount > 0 do
+      {:reply, new_stats, new_stats}
+    else
+      IO.puts "Oh no, an unexpected bug ):"
+      {:something_stupid}
+    end
+
   end
 
   def handle_call({:modify_the_gold, amount}, _from, my_stats) do
