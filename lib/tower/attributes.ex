@@ -15,6 +15,10 @@ defmodule TowerDefense.Tower.Attributes do
     {:ok, attributes}
   end
 
+  def get_tower_attributes() do
+    GenServer.call(:tower_process, {:get_tower_attributes})
+  end
+
   def upgrade_tower() do
     player_gold = Player.Stats.get_my_stats.gold
     upgrade_cost = get_tower_attributes().upgrade_cost
@@ -28,10 +32,6 @@ defmodule TowerDefense.Tower.Attributes do
     increase_level()
     Player.Stats.modify_my_gold(0-upgrade_cost)
     IO.puts "Tower upgraded!"
-  end
-
-  def get_tower_attributes() do
-    GenServer.call(:tower_process, {:get_tower_attributes})
   end
 
   def increase_level() do

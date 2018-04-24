@@ -10,6 +10,6 @@ defmodule TowerDefense.Monsters.Supervisor do
     children = [
       worker(Wave, [])
     ]
-    supervise(children, strategy: :one_for_all)
+    supervise(children, strategy: :one_for_one)
   end
 end
