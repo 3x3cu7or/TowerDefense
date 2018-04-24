@@ -10,6 +10,6 @@ defmodule TowerDefense.Player.Supervisor do
     children = [
       worker(Stats, [])
     ]
-    supervise(children, strategy: :one_for_one)
+    supervise(children, strategy: :one_for_all)
   end
 end
